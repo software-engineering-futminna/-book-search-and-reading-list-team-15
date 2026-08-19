@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BookNest — Search Books & Build Your Reading List</title>
+<meta name="description" content="Search millions of books from Open Library, save them to your reading list, and track what you're reading — all in your browser." />
+<meta property="og:title" content="BookNest — Search Books & Build Your Reading List" />
+<meta property="og:description" content="Search millions of books, save favourites and track your reading progress." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#38bdf8" />
+<link rel="manifest" href="static/manifest.json" />
+<link rel="icon" href="static/icons/icon-192.png" />
+<link rel="apple-touch-icon" href="static/icons/icon-192.png" />
+<link rel="stylesheet" href="static/styles.css" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+<div class="app">
+  <!-- Left icon rail -->
+  <aside class="rail" aria-label="Main navigation">
+    <div class="rail-logo" title="BookNest">
+        <img src="static/icons/app-icon.png" alt="BN" />
+    </div>
+    <nav class="rail-nav">
+      <button class="rail-btn is-active" data-view="search" aria-label="Search books" title="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      </button>
+      <button class="rail-btn" data-view="library" aria-label="Shelves" title="Shelves">
+        <svg viewBox="0 0 24 24"><path d="M4 5h6v14H4zM14 5h6v14h-6z"/></svg>
+      </button>
+      <button class="rail-btn" data-view="recent" aria-label="Recently viewed" title="Recently viewed">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+      </button>
+    </nav>
+    <button class="rail-btn rail-theme" id="themeToggle" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24"><path d="M20 14a8 8 0 01-10-10 8 8 0 1010 10z"/></svg>
+    </button>
+  </aside>
+
+  <main class="panel">
+    <header class="topbar">
+      <div>
+        <h1 class="brand">BOOK<span>NEST</span></h1>
+        <p class="tagline" id="tagline">Find your next favourite read</p>
+      </div>
+      <form class="search" id="searchForm" role="search">
+        <svg viewBox="0 0 24 24" class="search-icon"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <input id="searchInput" type="search" placeholder="Search by title, author or keyword…" aria-label="Search books" />
+        <button type="submit" class="btn-primary">Search</button>
+      </form>
+    </header>
+
+    <div class="pills" id="pills" role="tablist" aria-label="Categories">
+      <button class="pill is-active" data-q="">All</button>
+      <button class="pill" data-q="literature">Literature</button>
+      <button class="pill" data-q="science">Science</button>
+      <button class="pill" data-q="business">Business</button>
+      <button class="pill" data-q="history">History</button>
+      <button class="pill" data-q="fantasy">Fantasy</button>
+    </div>
+
+    <div class="pills shelves" id="shelves" role="tablist" aria-label="Shelves" hidden></div>
+
+    <div class="offline" id="offline" hidden>You're offline — showing saved data only.</div>
+
+    <section class="content">
+      <div class="grid-wrap">
+        <div class="grid-head">
+          <h2 id="gridTitle">Trending picks</h2>
+          <div class="grid-head-right">
+            <span class="count" id="gridCount"></span>
+            <div class="layout-toggle" id="layoutToggle" hidden role="group" aria-label="Choose display">
+              <button type="button" class="layout-btn" data-layout="grid" aria-label="Grid view" title="Grid view">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              </button>
+              <button type="button" class="layout-btn" data-layout="list" aria-label="List view" title="List view">
+                <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="grid" id="grid" aria-live="polite"></div>
+        <p class="empty" id="empty" hidden></p>
+      </div>
+
+      <!-- Quick look -->
+      <aside class="quick" id="quick" aria-label="Quick look">
+        <div class="quick-empty" id="quickEmpty">
+          <div class="quick-emoji">📖</div>
+          <p>Select a book to see details here.</p>
+        </div>
+        <div class="quick-body" id="quickBody" hidden></div>
+      </aside>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="static/app.js"></script>
+</body>
+</html>
